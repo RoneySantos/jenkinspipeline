@@ -17,7 +17,7 @@ pipeline {
             steps {
                 echo 'Deploying....'
             }
-        }
+        }}
 //    post {
 //        always {
 //            slackNotifier(currentBuild.currentResult)
