@@ -18,6 +18,12 @@ pipeline {
                 echo 'Deploying....'
             }
         }
+    post {
+        always {
+            slackNotifier(currentBuild.currentResult)
+            cleanWs()
+        }
+    }
 //        stage('Notificando o usuario') {
 //            steps {
 //              slackSend (color: 'good', message: '[ Sucesso ] O novo build esta disponivel em: http://192.168.33.10:81/ ', tokenCredentialId: 'slack-token')
