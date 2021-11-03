@@ -1,7 +1,9 @@
 // Jenkinsfile (Declarative Pipeline)
 pipeline {
-    agent any
-
+    agent {
+        docker { image 'node:14-alpine' }
+    }
+}
     stages {
         stage('Build') {
             steps {
@@ -11,8 +13,9 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
-                slackSend (color: 'good', message: "Testing - ${env.JOB_NNAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", tokenCredentialId: 'slack_token')  
+                sh 'node --version'
+                slackSend (color: 'good', message: "Testing - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", tokenCredentialId: 'slack_token')
+                
             }
         }
         stage('Deploy') {
