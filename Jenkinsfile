@@ -12,10 +12,9 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'node --versionn'
-                def slackResponse = slackSend(color: 'good', message: "Started Building - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", tokenCredentialId: 'slack_token')
-                slackSend(channel: slackResponse.threadId, message: "Build still in progress", tokenCredentialId: 'slack_token')
+                def slackResponse = slackSend(color: 'good', message: "Started Building", tokenCredentialId: 'slack_token')
+                slackSend(color: 'good', message: "Build still in progress", tokenCredentialId: 'slack_token')
                 slackSend(
-                    channel: slackResponse.threadId,
                     replyBroadcast: true,
                     message: "Build failed. Broadcast to channel for better visibility.",
                     tokenCredentialId: 'slack_token'
