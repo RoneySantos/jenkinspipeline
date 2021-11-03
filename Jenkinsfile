@@ -18,12 +18,12 @@ pipeline {
                 echo 'Deploying....'
             }
         }
-    post {
-        always {
-            slackNotifier(currentBuild.currentResult)
-            cleanWs()
+        post {
+            always {
+                slackNotifier(currentBuild.currentResult)
+                cleanWs()
+            }
         }
-    }
         stage('Notificando o usuario') {
             steps {
 //            slackSend (color: 'error', message: "Build Started - ${env.EXECUTOR_NUMBER} ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", tokenCredentialId: 'slack_token')  
