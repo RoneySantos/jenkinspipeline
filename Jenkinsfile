@@ -6,11 +6,13 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
+                slackSend (color: 'good', message: "Build Teste - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", tokenCredentialId: 'slack_token')  
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
+                slackSend (color: 'good', message: "Test - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", tokenCredentialId: 'slack_token')  
             }
         }
         stage('Deploy') {
