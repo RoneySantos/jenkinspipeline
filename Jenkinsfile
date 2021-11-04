@@ -1,3 +1,4 @@
+// Jenkinsfile (Declarative Pipeline)
 pipeline {
     agent {
         docker { image 'node:14-alpine' }
@@ -12,13 +13,8 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'node --versionn'
-                def slackResponse = slackSend(color: 'good', message: "Started Building", tokenCredentialId: 'slack_token')
-                slackSend(color: 'good', message: "Build still in progress", tokenCredentialId: 'slack_token')
-                slackSend(
-                    replyBroadcast: true,
-                    message: "Build failed. Broadcast to channel for better visibility.",
-                    tokenCredentialId: 'slack_token'
-                )                           
+                slackSend (color: 'good', message: "Testing - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", tokenCredentialId: 'slack_token')
+                           
             }
         }
         stage('Deploy') {
@@ -36,4 +32,22 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            echo 'One way or another, I have finished'
+            deleteDir() /* clean up our workspace */
+        }
+        success {
+            echo 'I succeeded!'
+        }
+        unstable {
+            echo 'I am unstable :/'
+        }
+        failure {
+            echo 'I failed :('
+        }
+        changed {
+            echo 'Things were different before...'
+        }
+    }    
 }
