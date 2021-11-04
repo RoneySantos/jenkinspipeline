@@ -46,7 +46,7 @@ pipeline {
         }
         failure {
             echo 'I failed :('
-            slackSend (color: 'good', message: "The pipeline ${currentBuild.fullDisplayName}  failed.", tokenCredentialId: 'slack_token') 
+            slackSend (color: 'danger', message: "The pipeline ${currentBuild.fullDisplayName}  failed.", tokenCredentialId: 'slack_token') 
         }
         changed {
             echo 'Things were different before...'
