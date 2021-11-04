@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'node --version'
+                sh 'node --versionn'
                 slackSend (color: 'good', message: "Testing - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", tokenCredentialId: 'slack_token')
                            
             }
@@ -39,12 +39,14 @@ pipeline {
         }
         success {
             echo 'I succeeded!'
+            slackSend (color: 'good', message: "The pipeline ${currentBuild.fullDisplayName} completed successfully.", tokenCredentialId: 'slack_token') 
         }
         unstable {
             echo 'I am unstable :/'
         }
         failure {
             echo 'I failed :('
+            slackSend (color: 'good', message: "The pipeline ${currentBuild.fullDisplayName}  failed.", tokenCredentialId: 'slack_token') 
         }
         changed {
             echo 'Things were different before...'
