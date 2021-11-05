@@ -52,5 +52,4 @@ pipeline {
         changed {
             echo 'Things were different before...'  //write message in the log file
         }
-    }    
-}
+    }
