@@ -8,7 +8,7 @@ pipeline {
             steps {
                 sh 'mkdir lab-teste-jenkins'
                 echo 'Building..'
-                slackSend (color: 'good', message: "Building - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", tokenCredentialId: 'slack_token')  
+                slackSend (color: 'good', message: "Building - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", tokenCredentialId: 'bot-jenkins-lab')  
             }
         }
         stage('test notification') {
