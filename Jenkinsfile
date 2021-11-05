@@ -3,7 +3,6 @@ pipeline {
       agent any  
 //    agent {
 //        docker { image 'node:14-alpine' }
-    }
     stages {
         stage('Build') {
             steps {
@@ -53,3 +52,4 @@ pipeline {
             echo 'Things were different before...'  //write message in the log file
         }
     }
+}
