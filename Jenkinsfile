@@ -6,6 +6,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh 'mkdir lab-teste-jenkins'
                 echo 'Building..'
                 slackSend (color: 'good', message: "Building - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", tokenCredentialId: 'slack_token')  
             }
@@ -19,6 +20,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
+                sh 'rm -rf lab-teste-jenkins'
                 echo 'Deploying....'
                 slackSend (color: 'good', message: "Deploying - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", tokenCredentialId: 'slack_token')  
             }
