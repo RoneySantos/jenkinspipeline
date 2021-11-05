@@ -22,7 +22,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'ls -la'
-                slackSend (color: 'good', message: "Testing - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", tokenCredentialId: 'slack_token')
+                slackSend (color: 'good', message: "Testing - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", tokenCredentialId: 'bot-jenkins-lab')
                            
             }
         }
@@ -30,7 +30,7 @@ pipeline {
             steps {
                 sh 'rm -rf lab-teste-jenkins'
                 echo 'Deploying....'
-                slackSend (color: 'good', message: "Deploying - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", tokenCredentialId: 'slack_token')  
+                slackSend (color: 'good', message: "Deploying - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", tokenCredentialId: 'bot-jenkins-lab')  
             }
         }
         stage('Notificando o usuario') {
